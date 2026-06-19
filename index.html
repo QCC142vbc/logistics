@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistics Intelligence Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">AI-powered logistics command tower</p>
+        <h1>Adaptive Logistics Command Engine</h1>
+        <p>Enterprise-grade visibility, predictive risk scoring, and prescriptive recommendations for global logistics operations.</p>
+      </div>
+      <div class="hero-panels">
+        <div class="hero-panel">
+          <strong>Command center</strong>
+          <span>Shipment, fleet, warehouse, and inventory monitoring in one view.</span>
+        </div>
+        <div class="hero-panel">
+          <strong>Risk intelligence</strong>
+          <span>Weather, traffic, fleet, driver, and congestion risk scoring.</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="architecture-grid">
+      <article class="architecture-card">
+        <strong>Frontend</strong>
+        <p>React, TypeScript, Tailwind CSS, and WebSockets for responsive dashboards.</p>
+      </article>
+      <article class="architecture-card">
+        <strong>Backend</strong>
+        <p>Node.js/Python services, API gateway, and event-driven orchestration.</p>
+      </article>
+      <article class="architecture-card">
+        <strong>Data Layer</strong>
+        <p>PostgreSQL, time-series telemetry, and object storage for historical events.</p>
+      </article>
+      <article class="architecture-card">
+        <strong>AI & Simulation</strong>
+        <p>Forecasting, optimization, LLM copilot, digital twin, and risk modeling.</p>
+      </article>
+    </section>
+
+    <section class="kpi-grid" aria-label="Key operational metrics">
+      <article class="kpi-card">
+        <span>Active shipments</span>
+        <strong id="shipmentsCount">24</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Fleet availability</span>
+        <strong id="fleetAvailability">88%</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Warehouse utilization</span>
+        <strong id="warehouseUtilization">74%</strong>
+      </article>
+      <article class="kpi-card">
+        <span>On-time performance</span>
+        <strong id="onTimeRate">96%</strong>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <section class="command-card">
+        <div class="command-card-header">
+          <div>
+            <h2>Operational risk engine</h2>
+            <p>Score the network across weather, traffic, fleet, driver, and warehouse risk.</p>
+          </div>
+          <span class="badge badge-strong">Risk</span>
+        </div>
+        <div class="command-grid">
+          <label>Weather risk<input id="weatherRisk" type="range" min="0" max="100" value="28" /></label>
+          <label>Traffic severity<input id="trafficSeverity" type="range" min="0" max="100" value="22" /></label>
+          <label>Warehouse congestion<input id="warehouseLoad" type="range" min="0" max="100" value="68" /></label>
+          <label>Fleet availability<input id="fleetAvailabilityInput" type="range" min="0" max="100" value="82" /></label>
+          <label>Driver readiness<input id="driverReadiness" type="range" min="0" max="100" value="92" /></label>
+        </div>
+        <div class="command-actions">
+          <button type="button" id="runAlce">Run risk scan</button>
+          <button type="button" id="approveAlce">Approve recommendation</button>
+        </div>
+        <div class="command-result" id="commandResult" aria-live="polite">
+          <p>Use the controls to simulate operations, then run the scan to get prioritized recommendations.</p>
+        </div>
+      </section>
+
+      <section class="analytics-card">
+        <div class="analytics-header">
+          <div>
+            <h2>Live shipment tracking</h2>
+            <p>Monitor the current location, ETA, and status of active loads.</p>
+          </div>
+          <span class="badge">Live</span>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Shipment</th><th>Status</th><th>ETA</th><th>Location</th></tr>
+            </thead>
+            <tbody id="shipmentTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="analytics-grid">
+      <article class="table-card">
+        <div class="table-card-header">
+          <div>
+            <h3>Warehouse status</h3>
+            <span>Capacity, throughput, and congestion heatmap.</span>
+          </div>
+        </div>
+        <ul class="warehouse-list" id="warehouseList"></ul>
+      </article>
+      <article class="table-card">
+        <div class="table-card-header">
+          <div>
+            <h3>Inventory visibility</h3>
+            <span>Stock levels across priority SKUs.</span>
+          </div>
+        </div>
+        <div id="inventoryChart"></div>
+      </article>
+    </section>
+
+    <section class="alerts-card">
+      <div class="alerts-header">
+        <div>
+          <h3>Real-time operational alerts</h3>
+          <p>Immediate action items and risk events.</p>
+        </div>
+      </div>
+      <ul class="alert-list" id="alertList">
+        <li class="alert-item status-active">No active operational alerts.</li>
+      </ul>
+    </section>
+
+    <section class="audit-card">
+      <div class="audit-header">
+        <div>
+          <h3>Audit log & role controls</h3>
+          <p>Multi-tenant readiness with action audit tracking.</p>
+        </div>
+      </div>
+      <ul class="audit-list" id="auditLog"></ul>
+    </section>
+
+    <section class="calculator-section">
+      <div class="section-title">
+        <h2>Core logistics calculators</h2>
+        <p>Preserve existing planning tools alongside the command center.</p>
+      </div>
+      <div class="dashboard-grid">
+        <form class="card" id="transportForm">
+          <div class="card-header">
+            <div>
+              <h2>Transport Cost</h2>
+              <p>Route, fuel, driver and overhead cost summary.</p>
+            </div>
+            <span class="badge">Cost</span>
+          </div>
+          <div class="form-grid">
+            <label>Distance (km)<input id="distance" type="number" min="0" step="0.1" value="120" /></label>
+            <label>Rate per km ($)<input id="ratePerKm" type="number" min="0" step="0.01" value="1.75" /></label>
+            <label>Fuel cost ($)<input id="fuelCost" type="number" min="0" step="0.01" value="150" /></label>
+            <label>Driver cost ($)<input id="driverCost" type="number" min="0" step="0.01" value="90" /></label>
+            <label>Additional cost ($)<input id="otherCost" type="number" min="0" step="0.01" value="25" /></label>
+          </div>
+          <button type="submit">Calculate Transport</button>
+          <div class="result" id="transportResult" aria-live="polite"></div>
+        </form>
+
+        <form class="card" id="timeForm">
+          <div class="card-header">
+            <div>
+              <h2>Delivery Time</h2>
+              <p>Estimate travel time with loading, unloading and delay factors.</p>
+            </div>
+            <span class="badge">Time</span>
+          </div>
+          <div class="form-grid">
+            <label>Distance (km)<input id="distanceTime" type="number" min="0" step="0.1" value="120" /></label>
+            <label>Average speed (km/h)<input id="speed" type="number" min="1" step="0.1" value="60" /></label>
+            <label>Loading time (h)<input id="loadingTime" type="number" min="0" step="0.1" value="1" /></label>
+            <label>Unloading time (h)<input id="unloadingTime" type="number" min="0" step="0.1" value="0.5" /></label>
+            <label>Traffic / delay factor<input id="delayFactor" type="number" min="1" step="0.1" value="1.1" /></label>
+          </div>
+          <button type="submit">Calculate Time</button>
+          <div class="result" id="timeResult" aria-live="polite"></div>
+        </form>
+
+        <form class="card" id="fuelForm">
+          <div class="card-header">
+            <div>
+              <h2>Fuel Consumption</h2>
+              <p>Estimate total fuel usage and cost for the route.</p>
+            </div>
+            <span class="badge">Fuel</span>
+          </div>
+          <div class="form-grid">
+            <label>Distance (km)<input id="fuelDistance" type="number" min="0" step="0.1" value="120" /></label>
+            <label>Fuel efficiency (km/L)<input id="efficiency" type="number" min="0.1" step="0.1" value="6" /></label>
+            <label>Fuel price ($/L)<input id="fuelPrice" type="number" min="0" step="0.01" value="1.45" /></label>
+          </div>
+          <button type="submit">Calculate Fuel</button>
+          <div class="result" id="fuelResult" aria-live="polite"></div>
+        </form>
+
+        <form class="card" id="densityForm">
+          <div class="card-header">
+            <div>
+              <h2>Load Density</h2>
+              <p>Compute weight per cubic meter for cargo planning.</p>
+            </div>
+            <span class="badge">Density</span>
+          </div>
+          <div class="form-grid">
+            <label>Weight (kg)<input id="weight" type="number" min="0" step="0.1" value="800" /></label>
+            <label>Volume (m³)<input id="volume" type="number" min="0.01" step="0.01" value="12" /></label>
+          </div>
+          <button type="submit">Calculate Density</button>
+          <div class="result" id="densityResult" aria-live="polite"></div>
+        </form>
+
+        <form class="card" id="reorderForm">
+          <div class="card-header">
+            <div>
+              <h2>Reorder Point</h2>
+              <p>Plan inventory reorder thresholds for smooth operations.</p>
+            </div>
+            <span class="badge">Stock</span>
+          </div>
+          <div class="form-grid">
+            <label>Daily demand (units)<input id="dailyDemand" type="number" min="0" step="1" value="40" /></label>
+            <label>Lead time (days)<input id="leadTime" type="number" min="0" step="0.1" value="5" /></label>
+            <label>Safety stock (units)<input id="safetyStock" type="number" min="0" step="1" value="80" /></label>
+          </div>
+          <button type="submit">Calculate Reorder</button>
+          <div class="result" id="reorderResult" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer-note">
+      <p>ALCE preserves logistics calculators while adding the next-generation command center experience for global supply chains.</p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
