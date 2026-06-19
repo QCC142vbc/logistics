@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistics Intelligence Platform</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">ALCE Lite — Command Engine Demo</p>
+        <h1>AI-powered logistics command layer</h1>
+        <p>Predict disruption, score risk, and recommend operational actions from weather, traffic, fleet load, and route inputs.</p>
+      </div>
+      <div class="hero-panels">
+        <div class="hero-panel">
+          <strong>Control tower</strong>
+          <span>Shipment risk and ETA insights from a single command view.</span>
+        </div>
+        <div class="hero-panel">
+          <strong>Prescriptive actions</strong>
+          <span>Clear recommendations for reroute, delay dispatch, or increase capacity.</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="architecture-grid">
+      <article class="architecture-card">
+        <strong>Frontend</strong>
+        <p>Minimal dashboard UI with live risk and recommendation synthesis.</p>
+      </article>
+      <article class="architecture-card">
+        <strong>Backend</strong>
+        <p>Node.js + Express API with deterministic risk, ETA, and recommendation endpoints.</p>
+      </article>
+      <article class="architecture-card">
+        <strong>Data</strong>
+        <p>Simple in-memory scenario modeling for end-to-end MVP demonstration.</p>
+      </article>
+      <article class="architecture-card">
+        <strong>Simulation</strong>
+        <p>Single-stage route estimate and risk simulation for decision support.</p>
+      </article>
+    </section>
+
+    <section class="kpi-grid" aria-label="Key operational metrics">
+      <article class="kpi-card">
+        <span>Network health</span>
+        <strong id="networkHealth">92%</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Risk confidence</span>
+        <strong id="riskConfidence">81%</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Delay forecast</span>
+        <strong id="delayForecast">+4.8h</strong>
+      </article>
+      <article class="kpi-card">
+        <span>Cost exposure</span>
+        <strong id="costExposure">$24.2K</strong>
+      </article>
+    </section>
+
+    <section class="dashboard-grid">
+      <section class="command-card command-card-expanded">
+        <div class="command-card-header">
+          <div>
+            <h2>ALCE command engine</h2>
+            <p>Adaptive operational intelligence for network-wide logistics risk and response.</p>
+          </div>
+          <span class="badge badge-strong">Control Tower</span>
+        </div>
+        <div class="scenario-panel">
+          <label class="scenario-label">Scenario</label>
+          <div class="scenario-row">
+            <select id="scenarioSelect" aria-label="Select logistics scenario">
+              <option value="peakSeason">Peak season surge</option>
+              <option value="stormFront">North Sea storm front</option>
+              <option value="portCongestion">Port congestion alert</option>
+              <option value="fleetShortage">Fleet availability pressure</option>
+            </select>
+            <button type="button" id="loadScenario">Load scenario</button>
+          </div>
+          <p class="scenario-note" id="scenarioNote">Select a strategic scenario to prefill risk inputs and stress the logistics network.</p>
+        </div>
+        <div class="command-grid command-grid-wide">
+          <label>Weather risk<input id="weatherRisk" type="range" min="0" max="100" value="28" /></label>
+          <label>Traffic severity<input id="trafficSeverity" type="range" min="0" max="100" value="22" /></label>
+          <label>Warehouse congestion<input id="warehouseLoad" type="range" min="0" max="100" value="68" /></label>
+          <label>Fleet availability<input id="fleetAvailabilityInput" type="range" min="0" max="100" value="82" /></label>
+          <label>Driver readiness<input id="driverReadiness" type="range" min="0" max="100" value="92" /></label>
+          <label>Route distance (km)<input id="routeDistance" type="number" min="1" step="1" value="180" /></label>
+          <label>Base speed (km/h)<input id="routeSpeed" type="number" min="10" step="1" value="65" /></label>
+        </div>
+        <div class="risk-summary-grid">
+          <article class="metric-card">
+            <span>Total risk</span>
+            <strong id="riskScore">48</strong>
+            <p id="riskStatus">Stable operations</p>
+          </article>
+          <article class="metric-card">
+            <span>Confidence</span>
+            <strong id="confidenceScore">78%</strong>
+            <p id="confidenceLabel">High certainty</p>
+          </article>
+          <article class="metric-card">
+            <span>Operational impact</span>
+            <strong id="impactEstimate">Moderate</strong>
+            <p id="impactNote">Utilize contingency capacity</p>
+          </article>
+        </div>
+        <div class="command-actions">
+          <button type="button" id="runAlce">Run risk scan</button>
+          <button type="button" id="approveAlce">Approve recommendation</button>
+        </div>
+        <div class="command-result" id="commandResult" aria-live="polite">
+          <p class="command-intro">ALCE synthesizes network factors and generates recommendations with cost, delay, and execution impact.</p>
+          <div class="risk-output" id="riskOutput"></div>
+          <div class="recommendation-panel" id="recommendationPanel"></div>
+        </div>
+        <div class="risk-breakdown" id="riskBreakdown"></div>
+      </section>
+
+      <section class="analytics-card analytics-card-tall">
+        <div class="analytics-header">
+          <div>
+            <h2>Live shipment tracking</h2>
+            <p>Monitor the current location, ETA, and status of active loads.</p>
+          </div>
+          <span class="badge">Live</span>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Shipment</th><th>Status</th><th>ETA</th><th>Location</th></tr>
+            </thead>
+            <tbody id="shipmentTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="analytics-grid">
+      <article class="table-card">
+        <div class="table-card-header">
+          <div>
+            <h3>Warehouse status</h3>
+            <span>Capacity, throughput, and congestion heatmap.</span>
+          </div>
+        </div>
+        <ul class="warehouse-list" id="warehouseList"></ul>
+      </article>
+      <article class="table-card">
+        <div class="table-card-header">
+          <div>
+            <h3>Inventory visibility</h3>
+            <span>Stock levels across priority SKUs.</span>
+          </div>
+        </div>
+        <div id="inventoryChart"></div>
+      </article>
+    </section>
+
+    <section class="scenario-summary-grid">
+      <article class="scenario-card">
+        <h3>Confidence driver</h3>
+        <p id="confidenceExplanation">Weather and traffic assumptions are stable, but warehouse pressure is increasing.</p>
+      </article>
+      <article class="scenario-card">
+        <h3>Estimated delay</h3>
+        <p id="delayExplanation">Expected delay impact of up to 4.8 hours if no mitigation is applied.</p>
+      </article>
+      <article class="scenario-card">
+        <h3>Cost impact</h3>
+        <p id="costExplanation">Projected incremental cost of $24,200 due to reroutes, overtime, and demurrage.</p>
+      </article>
+    </section>
+
+    <section class="alerts-card">
+      <div class="alerts-header">
+        <div>
+          <h3>Real-time operational alerts</h3>
+          <p>Immediate action items and risk events.</p>
+        </div>
+      </div>
+      <ul class="alert-list" id="alertList">
+        <li class="alert-item status-active">No active operational alerts.</li>
+      </ul>
+    </section>
+
+    <section class="audit-card">
+      <div class="audit-header">
+        <div>
+          <h3>Audit log & role controls</h3>
+          <p>Multi-tenant readiness with action audit tracking.</p>
+        </div>
+      </div>
+      <ul class="audit-list" id="auditLog"></ul>
+    </section>
+
+    <footer class="footer-note">
+      <p>ALCE Lite focuses on a tight command loop: shipment risk, ETA, and prescriptive action recommendations.</p>
+    </footer>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

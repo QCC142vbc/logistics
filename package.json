@@ -1,0 +1,13 @@
+{
+  "name": "logistics-tool-site",
+  "version": "0.1.0",
+  "description": "ALCE Lite — Minimal logistics command engine prototype",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

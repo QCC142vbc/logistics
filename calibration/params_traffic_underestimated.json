@@ -1,0 +1,65 @@
+{
+  "scaling": {
+    "weather": {
+      "p5": 5.155486252893952,
+      "p95": 16.07391169173029
+    },
+    "traffic": {
+      "p5": 0.14817693221425862,
+      "p95": 0.8678402948966978
+    },
+    "fleet": {
+      "p5": 0.16149955184893927,
+      "p95": 0.9552835610679261
+    },
+    "driver": {
+      "p5": 0.3058421271870669,
+      "p95": 0.7202053263201692
+    },
+    "warehouse": {
+      "p5": 14.395687045507362,
+      "p95": 50.695513676345676
+    }
+  },
+  "factorModels": {
+    "weather": {
+      "intercept": 0.0,
+      "coef": 1.0
+    },
+    "traffic": {
+      "intercept": 0.0,
+      "coef": 1.0
+    },
+    "fleet": {
+      "intercept": 0.0,
+      "coef": 1.0
+    },
+    "driver": {
+      "intercept": 0.0,
+      "coef": 1.0
+    },
+    "warehouse": {
+      "intercept": 0.0,
+      "coef": 1.0
+    }
+  },
+  "metaModel": {
+    "intercept": 0.46270843316303145,
+    "coefficients": {
+      "weather": 2.088715909370212,
+      "traffic": 2.802467833106603,
+      "fleet": 2.4536651600138693,
+      "driver": 1.5403221208608682,
+      "warehouse": 1.9869393926156422
+    }
+  },
+  "interactions": {},
+  "calibration": {
+    "intercept": 0.0,
+    "coef": 1.0
+  },
+  "distortion": {
+    "factor": "traffic",
+    "scale": 0.5
+  }
+}
