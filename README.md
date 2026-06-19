@@ -1,4 +1,4 @@
-# Logistics Intelligence Platform
+<meta http-equiv="refresh" content="0; url=/logistics/index.html">\n# Logistics Intelligence Platform
 
 An AI-powered logistics intelligence platform with live ALCE demo, predictive analytics, and advanced operational research.
 
